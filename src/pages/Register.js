@@ -22,7 +22,7 @@ function Register() {
 
       // 🔥 Langsung login setelah register
       const loginResponse = await axios.post(
-        "https://ktm-ticketing-backend-production.up.railway.app/auth/login",
+        "https://ktm-ticketing-backend-production.up.railway.app/auth/register",
         formData
       );
 
