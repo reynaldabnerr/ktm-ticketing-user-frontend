@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./InputData.css";
 
 function InputData() {
   const [nama, setNama] = useState("");
@@ -51,32 +52,47 @@ function InputData() {
   };
 
   return (
-    <div>
-      <h2>📝 Input Data & Bukti Transfer</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nama Lengkap"
-          value={nama}
-          onChange={(e) => setNama(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Nomor HP"
-          value={noHp}
-          onChange={(e) => setNoHp(e.target.value)}
-          required
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setBuktiTransfer(e.target.files[0])}
-          required
-        />
-        <button type="submit">✅ Simpan Data</button>
-      </form>
-      {message && <p>{message}</p>}
+    <div className="container">
+      <div className="input-container">
+        <h2>📝 Input Data & Bukti Transfer</h2>
+        <form className="input-form" onSubmit={handleSubmit}>
+          <input
+            className="input-field"
+            type="text"
+            placeholder="Nama Lengkap"
+            value={nama}
+            onChange={(e) => setNama(e.target.value)}
+            required
+          />
+          <input
+            className="input-field"
+            type="text"
+            placeholder="Nomor HP"
+            value={noHp}
+            onChange={(e) => setNoHp(e.target.value)}
+            required
+          />
+          <input
+            className="input-file"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setBuktiTransfer(e.target.files[0])}
+            required
+          />
+          <button className="submit-button" type="submit">
+            ✅ Simpan Data
+          </button>
+        </form>
+        {message && (
+          <p
+            className={`message ${
+              message.includes("❌") ? "error-message" : "success-message"
+            }`}
+          >
+            {message}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

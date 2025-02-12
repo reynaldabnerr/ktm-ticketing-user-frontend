@@ -17,10 +17,6 @@ function Register() {
     setMessage("⏳ Mendaftarkan...");
 
     try {
-      const response = await axios.post(
-        "https://ktm-ticketing-backend-production.up.railway.app/auth/register",
-        formData
-      );
 
       setMessage("✅ Pendaftaran Berhasil! Mengalihkan ke Input Data...");
 
