@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // 🔥 Import untuk navigasi
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"; // 🔥 Import Context
 import "./Register.css";
 
 function Register() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
-  const navigate = useNavigate(); // 🔥 Untuk redirect setelah register
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // 🔥 Ambil fungsi login dari context
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,21 +19,32 @@ function Register() {
     setMessage("⏳ Mendaftarkan...");
 
     try {
-
-      setMessage("✅ Pendaftaran Berhasil! Mengalihkan ke Input Data...");
-
-      // 🔥 Langsung login setelah register
-      const loginResponse = await axios.post(
+      // 🔥 Kirim data pendaftaran ke server
+      await axios.post(
         "https://ktm-ticketing-backend-production.up.railway.app/auth/register",
         formData
       );
 
-      // 🔥 Simpan token ke localStorage
-      localStorage.setItem("token", loginResponse.data.token);
+      console.log("✅ Register sukses!");
+      setMessage("✅ Pendaftaran Berhasil! Melakukan login otomatis...");
 
-      // 🔥 Alihkan ke halaman Input Data
+      // 🔥 Login otomatis setelah register
+      const loginResponse = await axios.post(
+        "https://ktm-ticketing-backend-production.up.railway.app/auth/login",
+        formData
+      );
+
+      const token = loginResponse.data.token;
+      login(token); // 🔥 Simpan token & update state tanpa refresh
+      console.log("🔑 Token disimpan:", token);
+
+      // 🔥 Redirect ke halaman Input Data
       setTimeout(() => navigate("/input-data"), 2000);
     } catch (error) {
+      console.error(
+        "❌ Error registrasi atau login:",
+        error.response?.data || error.message
+      );
       setMessage("❌ Pendaftaran Gagal! Email mungkin sudah terdaftar.");
     }
   };
