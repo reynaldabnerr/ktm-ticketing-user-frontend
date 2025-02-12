@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+/* 💠 Container */
+.input-container {
+    max-width: 420px;
+    margin: 50px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 💠 Title */
+.input-container h2 {
+    color: #333;
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* 💠 Form Styling */
+.input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 💠 Input Fields */
+.input-form input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s ease-in-out;
+}
+
+.input-form input:focus {
+    border-color: #4facfe;
+}
+
+/* 💠 File Upload Styling */
+.input-form input[type="file"] {
+    border: none;
+    background: #f8f8f8;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.input-form input[type="file"]:hover {
+    background: #e8e8e8;
+}
+
+/* 💠 Submit Button */
+.submit-button {
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: white;
+    padding: 14px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s ease-in-out;
+}
+
+.submit-button:hover {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+}
+
+/* 💠 Message Styling */
+.message {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* ✅ Success Message */
+.success-message {
+    color: green;
+    background: #eaffea;
+}
+
+/* ❌ Error Message */
+.error-message {
+    color: red;
+    background: #ffeaea;
+}
+
+/* 💠 Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 💠 Mobile Responsiveness */
+@media (max-width: 450px) {
+    .input-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .input-form input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .submit-button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}

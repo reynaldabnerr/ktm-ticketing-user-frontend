@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+/* 💠 Container Styling */
+.my-ticket-container {
+    max-width: 420px;
+    margin: 50px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 💠 Title */
+.my-ticket-container h2 {
+    color: #333;
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* 💠 Ticket Information */
+.ticket-info {
+    background: #f1f1f1;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 12px;
+    text-align: center;
+    /* ✅ Buat teks sejajar ke tengah */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-info p {
+    font-size: 16px;
+    margin: 6px 0;
+    font-weight: 500;
+}
+
+.ticket-info strong {
+    color: #444;
+    font-weight: 600;
+}
+
+/* 💠 QR Code Styling */
+.qr-code {
+    display: block;
+    margin: 20px auto;
+    width: 190px;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.qr-code:hover {
+    transform: scale(1.15);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 💠 Status Ticket */
+.ticket-status {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    /* ✅ Gunakan flexbox */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    transition: 0.3s ease-in-out;
+}
+
+/* ✅ Hadir Status */
+.status-hadir {
+    color: #1e7d22;
+    background: #e6ffe6;
+    border: 2px solid #1e7d22;
+}
+
+/* ❌ Belum Hadir Status */
+.status-belum {
+    color: #d63031;
+    background: #ffeaea;
+    border: 2px solid #d63031;
+}
+
+/* 💠 Tombol Download */
+.download-button {
+    background: #007bff;
+    color: white;
+    padding: 12px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    display: block;
+    margin: 20px auto 0;
+}
+
+.download-button:hover {
+    background: #0056b3;
+}
+
+/* 💠 Error / Message */
+.message {
+    font-size: 16px;
+    color: red;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+/* 💠 Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 💠 Responsive Adjustments */
+@media (max-width: 450px) {
+    .my-ticket-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .qr-code {
+        width: 160px;
+    }
+
+    .my-ticket-container h2 {
+        font-size: 22px;
+    }
+}
