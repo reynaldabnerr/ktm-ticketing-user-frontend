@@ -4,12 +4,12 @@ import html2canvas from "html2canvas";
 import "./MyTicket.css"; // Pastikan CSS telah diperbarui
 
 function MyTicket() {
-  const [ticket, setTicket] = useState(null);
+  const [tickets, setTickets] = useState([]); // ✅ Ubah dari single ticket menjadi array
   const [message, setMessage] = useState("");
-  const ticketRef = useRef(null); // 🔥 Referensi untuk elemen yang akan diambil gambarnya
+  const ticketRefs = useRef({}); // ✅ Simpan referensi untuk setiap tiket per event
 
   useEffect(() => {
-    const fetchTicket = async () => {
+    const fetchTickets = async () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
@@ -18,7 +18,7 @@ function MyTicket() {
         );
 
         if (response.data.tickets.length > 0) {
-          setTicket(response.data.tickets[0]);
+          setTickets(response.data.tickets);
         } else {
           setMessage("⚠️ Anda belum memiliki tiket.");
         }
@@ -27,61 +27,78 @@ function MyTicket() {
       }
     };
 
-    fetchTicket();
+    fetchTickets();
   }, []);
 
   // 🔥 Fungsi untuk menangkap tiket sebagai gambar & mengunduhnya
-  const handleDownloadTicket = async () => {
-    if (!ticketRef.current) return;
+  const handleDownloadTicket = async (ticketId) => {
+    if (!ticketRefs.current[ticketId]) return;
 
-    const canvas = await html2canvas(ticketRef.current, {
-      scale: 3, // ✅ Meningkatkan kualitas gambar
-      useCORS: true, // ✅ Memastikan font & gambar bisa ditampilkan
-      backgroundColor: null, // ✅ Agar transparan & tidak mengganggu desain
+    const canvas = await html2canvas(ticketRefs.current[ticketId], {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: null,
     });
 
     const link = document.createElement("a");
     link.href = canvas.toDataURL("image/png");
-    link.download = `Tiket-${ticket.ticketId}.png`;
+    link.download = `Tiket-${ticketId}.png`;
     link.click();
   };
 
   return (
     <div className="my-ticket-container">
-      <h2>🎟️ My Ticket</h2>
+      <h2>🎟️ My Tickets</h2>
       {message && <p>{message}</p>}
-      {ticket && (
-        <div ref={ticketRef} className="ticket-content">
-          <div className="ticket-info">
-            <p>
-              <strong>Nama:</strong> {ticket.nama}
-            </p>
-            <p>
-              <strong>Email:</strong> {ticket.email}
-            </p>
-            <p>
-              <strong>No HP:</strong> {ticket.noHp}
-            </p>
-            <p>
-              <strong>Ticket ID:</strong> {ticket.ticketId}
-            </p>
-            <p
-              className={`ticket-status ${
-                ticket.hadir ? "status-hadir" : "status-belum"
-              }`}
+      {tickets.length > 0 ? (
+        tickets.map((ticket) =>
+          ticket.events.map((event, index) => (
+            <div
+              key={event.ticketId}
+              ref={(el) => (ticketRefs.current[event.ticketId] = el)}
+              className="ticket-content"
             >
-              {ticket.hadir ? "✅ Sudah Check-in" : "❌ Belum Check-in"}
-            </p>
-            <img src={ticket.qrCode} alt="QR Code" className="qr-code" />
-          </div>
-        </div>
-      )}
+              <div className="ticket-info">
+                <p>
+                  <strong>Nama:</strong> {ticket.nama}
+                </p>
+                <p>
+                  <strong>Email:</strong> {ticket.email}
+                </p>
+                <p>
+                  <strong>No HP:</strong> {ticket.noHp}
+                </p>
 
-      {/* 🔥 Tombol Download Tiket */}
-      {ticket && (
-        <button className="download-button" onClick={handleDownloadTicket}>
-          📥 Download Tiket
-        </button>
+                {/* ✅ Tampilkan informasi event yang diikuti */}
+                <p>
+                  <strong>Event:</strong> {event.nama}
+                </p>
+                <p>
+                  <strong>Ticket ID:</strong> {event.ticketId}
+                </p>
+                <img src={event.qrCode} alt="QR Code" className="qr-code" />
+
+                <p
+                  className={`ticket-status ${
+                    event.hadir ? "status-hadir" : "status-belum"
+                  }`}
+                >
+                  {event.hadir ? "✅ Sudah Check-in" : "❌ Belum Check-in"}
+                </p>
+              </div>
+
+              {/* 🔥 Tombol Download Tiket */}
+              <button
+                className="download-button"
+                onClick={() => handleDownloadTicket(event.ticketId)}
+              >
+                📥 Download Tiket
+              </button>
+            </div>
+          ))
+        )
+      ) : (
+        <p>⚠️ Tidak ada tiket yang ditemukan.</p>
       )}
     </div>
   );

@@ -1,157 +1,116 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 
-/* 🔹 Global Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-body {
-    font-family: "Montserrat", sans-serif;
-}
-
-/* 🔹 Container agar form ada di tengah bawah */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* 🔥 Agar form turun ke bawah */
-    min-height: 85vh;
-    /* 🔥 Pastikan form tetap berada di layar bawah */
-    padding-bottom: 50px;
-}
-
-/* 🔹 Pastikan navbar tetap di atas */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100px;
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px 30px;
-    z-index: 1000;
-}
-
-/* 🔹 Container utama */
 .input-container {
-    width: 100%;
-    max-width: 420px;
-    padding: 30px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
     text-align: center;
-    animation: fadeIn 0.6s ease-in-out;
+    font-family: "Montserrat", sans-serif;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 /* 🔹 Title */
 .input-container h2 {
+    color: #333;
     font-size: 24px;
-    font-weight: 600;
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.input-container h2::before {
-    font-size: 22px;
-}
-
-/* 🔹 Form Styling */
-.input-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    font-weight: 600;
 }
 
 /* 🔹 Input Fields */
-.input-field {
+.input-container input {
     width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    display: block;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* 🔹 Event Checkbox Section */
+.event-selection {
+    text-align: left;
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8f8f8;
     border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-    transition: border 0.3s ease-in-out, transform 0.2s ease-in-out;
-    background: white;
-    color: #444;
-    font-weight: 500;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.input-field:focus {
-    border-color: #4facfe;
-    transform: scale(1.02);
+.event-selection h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
 }
 
-/* 🔹 File Upload Styling */
-.input-file {
-    border: 2px dashed #bbb;
-    padding: 12px;
-    text-align: center;
+.event-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.event-checkbox input {
+    width: 18px;
+    height: 18px;
     cursor: pointer;
-    font-size: 16px;
-    color: #666;
-    transition: background 0.3s ease-in-out;
 }
 
-.input-file:hover {
-    background: #f1f1f1;
+/* 🔹 File Upload */
+.upload-section {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.upload-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.input-container input[type="file"] {
+    border: none;
+    padding: 5px;
+    font-size: 14px;
 }
 
 /* 🔹 Submit Button */
 .submit-button {
-    background: #4caf50;
+    background: #3a3a3a;
     color: white;
-    padding: 14px;
-    font-size: 18px;
+    padding: 12px;
+    width: 100%;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.3s ease-in-out, transform 0.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.submit-button::before {
+    border-radius: 5px;
     font-size: 18px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s ease-in-out;
 }
 
 .submit-button:hover {
-    background: #388e3c;
-    transform: scale(1.05);
+    background: #000000;
 }
 
-/* 🔹 Message Styling */
+/* 🔹 Message */
 .message {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 12px;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-/* ✅ Success Message */
-.success-message {
-    color: green;
-    background: #eaffea;
-}
-
-/* ❌ Error Message */
-.error-message {
+    font-size: 14px;
+    font-weight: 600;
     color: red;
-    background: #ffeaea;
+    margin-top: 10px;
 }
 
-/* 🔹 Fade In Animation */
+/* 🔹 Animasi */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -164,20 +123,15 @@ body {
     }
 }
 
-/* 🔹 Mobile Responsiveness */
-@media (max-width: 450px) {
+/* 🔹 Responsiveness */
+@media (max-width: 480px) {
     .input-container {
         width: 90%;
         padding: 20px;
     }
 
-    .input-form input {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .submit-button {
-        font-size: 16px;
-        padding: 12px;
+    .event-selection,
+    .upload-section {
+        padding: 8px;
     }
 }

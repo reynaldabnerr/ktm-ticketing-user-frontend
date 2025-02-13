@@ -21,25 +21,28 @@ function Login() {
         { email, password }
       );
 
+      console.log("🔥 Token yang diterima:", response.data.token);
+
       localStorage.setItem("token", response.data.token);
-      login(response.data.token); // 🔥 Perbarui state global
+      login(response.data.token); // 🔥 Update state global AuthContext
 
       setMessage("✅ Login berhasil!");
 
       // 🔥 Cek apakah user sudah punya tiket
       const checkTicket = await axios.get(
-        "https://ktm-ticketing-backend-production.up.railway.app/tickets/check-user-ticket",
+        "https://ktm-ticketing-backend-production.up.railway.app/tickets/my-tickets",
         {
           headers: { Authorization: `Bearer ${response.data.token}` },
         }
       );
 
       if (checkTicket.data.hasTicket) {
-        navigate("/my-ticket"); // 🔥 Jika sudah punya tiket, langsung ke My Ticket
+        navigate("/my-ticket");
       } else {
-        navigate("/input-data"); // 🔥 Jika belum, ke halaman input data
+        navigate("/input-data");
       }
     } catch (error) {
+      console.error("❌ Error Login:", error.response?.data || error.message);
       setMessage(error.response?.data?.message || "❌ Gagal login!");
     }
   };
